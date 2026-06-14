@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Commerce Sentiment Engine AI — E-Commerce Sentiment Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="platform-shopee">
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-icon">🔍</div>
+          E-Commerce Sentiment Engine
+        </a>
+        <span class="nav-badge">NLP · Linear SVM</span>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow">Shopee Sentiment Intelligence</div>
+      <h1 class="hero-title">
+        Deteksi Sentimen<br />
+        <span>Ulasan Produk</span> secara Instan
+      </h1>
+      <p class="hero-sub">
+        Didukung oleh TF-IDF Feature Extraction dan Linear Support Vector Machine (SVM) — 
+  klasifikasi otomatis teks ulasan e-commerce ke dalam sentimen Positif, Netral, atau Negatif secara real-time
+      </p>
+
+      <div class="analyzer-card">
+        <div class="platform-selector">
+          <button type="button" class="platform-btn" data-platform="tokopedia">
+            <span class="platform-btn-dot"></span>Tokopedia
+          </button>
+          <button type="button" class="platform-btn active" data-platform="shopee">
+            <span class="platform-btn-dot"></span>Shopee
+          </button>
+        </div>
+
+        <label class="input-label" for="reviewInput">MASUKKAN TEKS ULASAN (BISA MULTIPLE TEXT)</label>
+        <textarea
+          id="reviewInput"
+          class="review-textarea"
+          maxlength="2000"
+        ></textarea>
+        <div class="card-footer">
+          <span class="char-count"><span id="charCount">0</span> / 2000 karakter</span>
+          <button class="btn-analyze" id="analyzeBtn" onclick="analyzeReview()">
+            <span class="btn-text">Analisis Sentimen</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="result-section"></div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-eyebrow">Behind the Engine</div>
+      <h2 class="section-title">Teknologi di Balik Layar</h2>
+      <p class="section-sub">
+        E-Commerce Sentiment Engine AI dibangun di atas fondasi algoritma machine learning klasik yang
+        terbukti andal untuk klasifikasi teks — ringan, cepat, dan interpretatif.
+      </p>
+      <div class="engine-grid">
+        <div class="engine-card">
+          <div class="engine-icon">📊</div>
+          <h3>TF-IDF Vectorizer</h3>
+          <p>
+            <p>
+  Term Frequency–Inverse Document Frequency mengekstraksi bobot kata dari hasil preprocessing teks 
+  menjadi representasi matriks numerik yang informatif, sebagai basis vektor input matematis sebelum dieksekusi oleh mesin pengklasifikasi SVM.
+</p>
+          </p>
+          <span class="engine-tag">Feature Extraction</span>
+        </div>
+        <div class="engine-card">
+  <div class="engine-icon">🧮</div>
+  <h3>Linear Support Vector Machine</h3>
+  <p>
+    Model klasifikasi berbasis hyperplane linier yang memisahkan ruang dimensi tinggi fitur secara optimal. 
+    Sangat superior untuk pengenalan pola teks e-commerce, terbukti menghasilkan performa akurasi tertinggi sebesar 94.92% pada uji eksperimen riset.
+  </p>
+  <span class="engine-tag">Classifier Engine</span>
+</div>
+        <div class="engine-card">
+          <div class="engine-icon">🐍</div>
+          <h3>Flask REST API</h3>
+          <p><p>
+  Backend berbasis Flask Python mengelola pipeline inferensi data secara real-time. Alur sistem memproses Input Review melalui modul Parser Tokopedia/Shopee, dilanjutkan dengan Text Cleaning, ekstraksi fitur via TF-IDF Vectorizer, klasifikasi menggunakan Linear SVM untuk menghasilkan Sentiment Prediction dan Confidence Score yang ditransmisikan dalam wujud JSON Response menuju antarmuka web.
+</p>
+          </p>
+          <span class="engine-tag">Backend · Python</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-eyebrow">Meet the Team</div>
+      <h2 class="section-title">Tim di Balik E-Commerce Sentiment Engine AI</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <div class="team-avatar-ring"></div>
+            <div class="team-avatar">
+              <img src="{{ url_for('static', filename='agil.jpeg') }}" alt="Alif Agil" onerror="this.style.display='none'; this.parentNode.innerText='AA'">
+            </div>
+          </div>
+          <div class="team-name">Alif Agil</div>
+          <div class="team-role">Machine Learning Engineer</div>
+          <div class="team-uni">Computer Science &middot; <strong>Binus University</strong></div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <div class="team-avatar-ring"></div>
+            <div class="team-avatar">
+              <img src="{{ url_for('static', filename='muet.jpeg') }}" alt="Muadzarfan" onerror="this.style.display='none'; this.parentNode.innerText='MT'">
+            </div>
+          </div>
+          <div class="team-name">Muadzarfan</div>
+          <div class="team-role">Fullstack Integrator</div>
+          <div class="team-uni">Computer Science &middot; <strong>Binus University</strong></div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <div class="team-avatar-ring"></div>
+            <div class="team-avatar">
+              <img src="{{ url_for('static', filename='but.jpeg') }}" alt="Risky" onerror="this.style.display='none'; this.parentNode.innerText='AR'">
+            </div>
+          </div>
+          <div class="team-name">Risky</div>
+          <div class="team-role">Data Scientist</div>
+          <div class="team-uni">Computer Science &middot; <strong>Binus University</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">E-Commerce Sentiment<span>Engine</span> AI &mdash; E-Commerce Sentiment Intelligence</div>
+        <div class="footer-note">Binus University · Computer Science · NLP Project 2026</div>
+      </div>
+    </div>
+  </footer>
+<p><p>
+  <!-- Backend berbasis Flask Python mengelola pipeline inferensi data secara real-time. Alur sistem memproses Input Review melalui modul Parser Tokopedia/Shopee, dilanjutkan dengan Text Cleaning, ekstraksi fitur via TF-IDF Vectorizer, klasifikasi menggunakan Linear SVM untuk menghasilkan Sentiment Prediction dan Confidence Score yang ditransmisikan dalam wujud JSON Response menuju antarmuka web. -->
+</p>
+</p>
+  <div class="toast" id="toast"></div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
